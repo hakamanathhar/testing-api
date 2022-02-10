@@ -197,6 +197,55 @@ module.exports = {
         }
     },
     edit: async (req, res) => {
-        
+        try {
+            const {
+                id,
+                cust_name,
+                pic,
+                region,
+                province,
+                city,
+                remark,
+                address,
+                address_nd,
+                contact,
+                kuota
+            } = req.body;
+
+            const regionObj = await Countries.findOne({id: region})
+            const provinceObj = await States.findOne({id: province})
+            const cityObj = await Cities.findOne({id: city})
+
+            const count = await Visitors.countDocuments()
+            const digit = `${count}`;
+            const maskedNumberRM = digit.padStart(5, '0');
+
+            const visitorData = {
+                customer_name: cust_name,
+                pic: pic,
+                region: regionObj._id,
+                province: provinceObj._id,
+                city: cityObj._id,
+                remark: remark,
+                address_primary: address,
+                address_secondary: address_nd,
+                contact_no: contact,
+                kuota: kuota,
+                medical_record: `RM-${maskedNumberRM}`,
+            }
+
+            const visitor = await Visitors.updateOne({ _id: id },visitorData)
+
+            return res.status(200).json({
+                status: true,
+                message: 'Sucessfully!'
+            })
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({
+                status: false,
+                message: 'Failed!'
+            })
+        }
     },
 }
