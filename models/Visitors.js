@@ -44,6 +44,10 @@ const visitorSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    medical_record: {
+        type: String,
+        required: true
+    },
 },{ timestamps: true });
 
 module.exports = mongoose.model('visitors', visitorSchema);
