@@ -119,13 +119,13 @@ module.exports = {
             `)
             .populate([{
                 path: 'province',
-                select: '_id name'
+                select: '_id id name'
             },{
                 path: 'region',
-                select: '_id name'
+                select: '_id id name'
             },{
                 path: 'city',
-                select: '_id name'
+                select: '_id id name'
             }])
             
 

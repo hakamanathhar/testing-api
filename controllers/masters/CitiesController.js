@@ -23,12 +23,12 @@ module.exports = {
             })
         }
     },
-    getByStateId: async (req, res) => {
+    getByObjId: async (req, res) => {
         try {
-            const { state } = req.params
+            const { id } = req.params
             
             const cities = await Cities.find({
-                _id: state
+                _id: id
             }).limit(20)
         
             return res.status(200).json({

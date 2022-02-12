@@ -22,11 +22,11 @@ module.exports = {
             })
         }
     },
-    getByCountriesId: async (req, res) => {
+    getByObjId: async (req, res) => {
         try {
-            const { countries } = req.params
+            const { id } = req.params
             const states = await States.find({
-                _id: countries
+                _id: id
             }).limit(20)
         
             return res.status(200).json({
