@@ -92,7 +92,7 @@ module.exports = {
             var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             let queueTotal = await Queues.find({createdAt: {
                 $gte: startOfToday
-              }}).count()
+              }}).count() + 1
 
             
             const maskedNumberQueueTotal = `${queueTotal}`.padStart(3, '0');
