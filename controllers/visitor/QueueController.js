@@ -40,7 +40,7 @@ module.exports = {
     lastData: async (req, res) => {
         try {
 
-            const queue = await Queues.findOne({},{}, { sort: { 'created_at' : 1 } })
+            const queue = await Queues.findOne({},{}, { sort: { 'createdAt' : -1 } })
             
             return res.status(200).json({
                 status: true,
