@@ -19,7 +19,9 @@ module.exports = {
                 address_secondary
                 contact_no
                 kuota
+                medical_record
             `)
+            .sort({createdAt: -1})
             .populate([{
                 path: 'province',
                 select: '_id name'
@@ -216,10 +218,6 @@ module.exports = {
             const provinceObj = await States.findOne({id: province})
             const cityObj = await Cities.findOne({id: city})
 
-            const count = await Visitors.countDocuments()
-            const digit = `${count}`;
-            const maskedNumberRM = digit.padStart(5, '0');
-
             const visitorData = {
                 customer_name: cust_name,
                 pic: pic,
@@ -230,8 +228,7 @@ module.exports = {
                 address_primary: address,
                 address_secondary: address_nd,
                 contact_no: contact,
-                kuota: kuota,
-                medical_record: `RM-${maskedNumberRM}`,
+                kuota: kuota
             }
 
             const visitor = await Visitors.updateOne({ _id: id },visitorData)

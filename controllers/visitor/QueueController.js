@@ -16,6 +16,7 @@ module.exports = {
                 id_barcode
                 medical_record
             `)
+            .sort({createdAt: -1})
             .limit(perPage)
             .skip(perPage * page)
 
