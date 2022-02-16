@@ -10,7 +10,7 @@ const countriesSchema = new mongoose.Schema({
     },
     capital: {
         type: String
-    }
+    },
 });
 
 module.exports = mongoose.model('countries', countriesSchema);

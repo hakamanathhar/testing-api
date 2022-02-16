@@ -16,6 +16,7 @@ module.exports = {
                 id_barcode
                 medical_record
             `)
+            .sort({createdAt: -1})
             .limit(perPage)
             .skip(perPage * page)
 
@@ -39,7 +40,7 @@ module.exports = {
     lastData: async (req, res) => {
         try {
 
-            const queue = await Queues.findOne({},{}, { sort: { 'created_at' : 1 } })
+            const queue = await Queues.findOne({},{}, { sort: { 'createdAt' : -1 } })
             
             return res.status(200).json({
                 status: true,
@@ -91,7 +92,7 @@ module.exports = {
             var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             let queueTotal = await Queues.find({createdAt: {
                 $gte: startOfToday
-              }}).count()
+              }}).count() + 1
 
             
             const maskedNumberQueueTotal = `${queueTotal}`.padStart(3, '0');
